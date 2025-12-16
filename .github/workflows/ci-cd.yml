@@ -18,7 +18,6 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v4
 
-      # 🔐 Login to GHCR (NO PAT needed)
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -35,10 +34,9 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}:latest
 
-      # 🔁 Update GitOps repository (ArgoCD will sync)
       - name: Update GitOps repository
         env:
           GITOPS_PAT: ${{ secrets.GITOPS_PAT }}
@@ -56,7 +54,7 @@ jobs:
           git add deployment.yaml
 
           if git diff --cached --quiet; then
-            echo "No changes detected. Skipping commit."
+            echo "No changes detected, skipping commit"
           else
             git commit -m "Update image to ${{ github.sha }}"
             git push origin main
