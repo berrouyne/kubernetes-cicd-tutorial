@@ -6,7 +6,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-let grades = [];
+// ✅ Hardcoded data to prove CI/CD deployment
+let grades = [1, 2, 3];
 
 app.get('/grades', (req, res) => {
   console.log('Received GET request for grades');
@@ -27,14 +28,14 @@ app.listen(port, () => {
   console.log(`Grade service is running on port ${port}`);
 });
 
+/*
+To get this Node.js API up and running:
 
-// To get this Node.js API up and running:
-//
-//  First, install the dependencies listed in package.json:
-//   npm install
-//
-// Then, start the API server with:
-//   node app.js
-//
+1. Install dependencies:
+   npm install
 
-// Trigger CI/CD pipeline...
+2. Start the server:
+   node app.js
+
+Trigger CI/CD pipeline...
+*/
