@@ -34,7 +34,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}-app:${{ github.sha }}
 
       - name: Update GitOps repository
         env:
@@ -45,7 +45,7 @@ jobs:
           git clone https://x-access-token:${GITOPS_PAT}@github.com/berrouyne/grade-api-gitops.git gitops
           cd gitops
 
-          sed -i "s|image: ghcr.io/${{ github.repository }}:.*|image: ghcr.io/${{ github.repository }}:${{ github.sha }}|g" deployment.yaml
+          sed -i "s|image: ghcr.io/${{ github.repository }}.*|image: ghcr.io/${{ github.repository }}-app:${{ github.sha }}|g" deployment.yaml
 
           git config user.name "github-actions"
           git config user.email "actions@github.com"
