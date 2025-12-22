@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // ✅ Hardcoded data to prove CI/CD deployment
-let grades = [1, 2, 3];
+let grades = [1, 2, 3, 4, 5];
 
 app.get('/grades', (req, res) => {
   console.log('Received GET request for grades');
